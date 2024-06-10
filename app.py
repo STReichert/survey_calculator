@@ -9,11 +9,11 @@ app_ui = ui.page_fluid(
             ui.input_numeric("simple", "Number of simple questions (yes/no, or a simple scale)", value=0, width='800px'),
             ui.input_numeric("multi", "Total number of choices in multiple choice or rank questions", value=0, width='800px'),
             ui.input_numeric("short_ans", "Number of short response questions (1 Sentence expected)", value=0, width='800px'),
-            ui.input_numeric("long_ans", "Number of long respponse questions (3-4 sentences expected)", value=0, width='800px'),
+            ui.input_numeric("long_ans", "Number of long response questions (3-4 sentences expected)", value=0, width='800px'),
             ui.input_numeric("calculations", "Number of questions requiring minor calculations", value=0, width='800px'),
             ui.input_numeric("map", "Number of map or spatial response questions", value=0, width='800px'),
             ui.input_numeric("likert", """Total number of likert or "grid response" qestions""", value=0, width='800px'),
-            ui.input_numeric("instructions", "Total Number of Sentances of Instructions", value=0, width='800px')
+            ui.input_numeric("instructions", "Total number of sentances of instructions", value=0, width='800px')
         ),
         ui.column(4,
             ui.value_box(
