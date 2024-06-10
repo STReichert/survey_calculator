@@ -1,25 +1,23 @@
 from shiny import App, reactive, ui, render
 
-timer = ui.HTML(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="c0c0c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>'
-)
+timer = ui.HTML('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="timer " style="fill:currentColor;height:100%;" aria-hidden="true" role="img" ><path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/><path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/></svg>')
 
 app_ui = ui.page_fluid(
-    ui.panel_title("Counter Example"),
+    ui.panel_title("Survey Length Estimator"),
     ui.row(
-        ui.column(6,
-            ui.input_numeric("simple", "Number of simple questions (yes/no, or a simple scale)", value=0),
-            ui.input_numeric("multi", "Total number of choices in multiple choice or rank questions", value=0),
-            ui.input_numeric("short_ans", "Number of short response questions (1 Sentence expected)", value=0),
-            ui.input_numeric("long_ans", "Number of long respponse questions (3-4 sentences expected)", value=0),
-            ui.input_numeric("calculations", "Number of questions requiring minor calculations", value=0),
-            ui.input_numeric("map", "Number of map or spatial response questions", value=0),
-            i.input_numeric("likert", """Total number of likert or "grid response" qestions""", value=0),
-            ui.input_numeric("instructions", "Total Number of Sentances of Instructions", value=1)
+        ui.column(8,
+            ui.input_numeric("simple", "Number of simple questions (yes/no, or a simple scale)", value=0, width='800px'),
+            ui.input_numeric("multi", "Total number of choices in multiple choice or rank questions", value=0, width='800px'),
+            ui.input_numeric("short_ans", "Number of short response questions (1 Sentence expected)", value=0, width='800px'),
+            ui.input_numeric("long_ans", "Number of long respponse questions (3-4 sentences expected)", value=0, width='800px'),
+            ui.input_numeric("calculations", "Number of questions requiring minor calculations", value=0, width='800px'),
+            ui.input_numeric("map", "Number of map or spatial response questions", value=0, width='800px'),
+            ui.input_numeric("likert", """Total number of likert or "grid response" qestions""", value=0, width='800px'),
+            ui.input_numeric("instructions", "Total Number of Sentances of Instructions", value=0, width='800px')
         ),
-        ui.column(6,
+        ui.column(4,
             ui.value_box(
-                "Survey Length",
+                "Estimated Survey Length",
                 value=ui.output_text("current_value"),
                 showcase=timer,
                 theme="bg-gradient-blue-purple"
@@ -50,7 +48,7 @@ def server(input, output, session):
         instruction_points = handle_none(input.instructions())/3
         total = sum([simple_points, multi_points, short_points, long_points, map_points, calc_points, likert_points, instruction_points])
         time = total/8
-        mintues = int(time)
+        minutes = int(time)
         seconds = int((time-minutes)*60)
         return f"{minutes} minute{plural(minutes)} and {seconds} second{plural(seconds)}"
 
